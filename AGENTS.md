@@ -3,6 +3,10 @@
 > **End-user cheatsheet for AI-assisted consumption:** [`llms.txt`](llms.txt) — use that one if you're writing code *against* the dashboard.
 > **This file** is for AI agents working *on* this repo itself.
 
+## Why things are the way they are
+
+See [`context/index.md`](context/index.md) before making non-trivial changes — it points to the reasoning behind design decisions, rejected alternatives, and constraints that aren't visible in the code. If `AGENTS.local.md` exists in this repo, that's personal/local notes, not relevant to anyone else.
+
 ## Planning & Backlog
 
 Open development tasks and decisions are tracked in **[TASKS.md](TASKS.md)**.
@@ -38,7 +42,9 @@ ubdcc_dashboard/
 - The HTML is the actual product. It's a single file, vanilla JS, no
   framework. Keep it dependency-free.
 - `server.py` is deliberately tiny — `http.server.SimpleHTTPRequestHandler`
-  subclass with three extra endpoints. No external deps.
+  subclass with three extra endpoints. No external deps. Why it also acts as
+  a CORS proxy instead of requiring cluster-side CORS support:
+  [`context/cors-proxy.md`](context/cors-proxy.md).
 - `cli.py` exposes exactly one subcommand today: `start`. Flags: `--host`
   (default `127.0.0.1`, localhost only), `--port` (default `8080`),
   `--no-browser`, `--proxy-timeout`, `--batch-workers`.
@@ -87,3 +93,8 @@ ubdcc_dashboard/
   prefer readability over micro-optimisation.
 - Keep `server.py` small and dependency-free. Anything that needs a library
   belongs either in the dashboard (client-side) or in a separate tool.
+
+<!-- keep-the-why:config -->
+- context: `context/`
+- init: complete
+<!-- /keep-the-why:config -->
