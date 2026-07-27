@@ -3,7 +3,8 @@
 ## Split out of `ubdcc-dashboard-demo`
 
 **Status:** active
-**Confirmed** (initial commit `5f9384a`: "server.py bundles the existing /proxy + /proxy_batch logic from the ubdcc-dashboard-demo")
+**Evidence:** confirmed
+**Source:** initial commit `5f9384a`: "server.py bundles the existing /proxy + /proxy_batch logic from the ubdcc-dashboard-demo"
 
 This repo's `/proxy` and `/proxy_batch` server logic originated in the sibling `ubdcc-dashboard-demo` project, and was carried over when this pip-installable CLI package was created.
 
