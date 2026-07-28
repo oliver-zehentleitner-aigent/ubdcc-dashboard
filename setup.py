@@ -50,8 +50,8 @@ setup(
         "Changes": "https://github.com/oliver-zehentleitner/ubdcc-dashboard/blob/master/CHANGELOG.md",
         "License": "https://github.com/oliver-zehentleitner/ubdcc-dashboard/blob/master/LICENSE",
         "Issue Tracker": "https://github.com/oliver-zehentleitner/ubdcc-dashboard/issues",
-        'Telegram': 'https://t.me/unicorndevs',
-        'Umbrella Project': 'https://github.com/oliver-zehentleitner/unicorn-binance-suite',
+        "Telegram": "https://t.me/unicorndevs",
+        "Umbrella Project": "https://github.com/oliver-zehentleitner/unicorn-binance-suite",
     },
     classifiers=[
         "Development Status :: 5 - Production/Stable",

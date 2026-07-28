@@ -3,6 +3,7 @@
 Serves the bundled static dashboard (index.html) and proxies browser requests
 to a UBDCC MGMT node so the Same-Origin-Policy does not block them.
 """
+
 from __future__ import annotations
 
 import concurrent.futures
@@ -30,8 +31,13 @@ def _static_dir() -> str:
     return str(ref)
 
 
-def _fetch(url: str, timeout: float, method: str = "GET", body: bytes | None = None,
-           content_type: str | None = None) -> tuple[int, dict]:
+def _fetch(
+    url: str,
+    timeout: float,
+    method: str = "GET",
+    body: bytes | None = None,
+    content_type: str | None = None,
+) -> tuple[int, dict]:
     req = urllib.request.Request(url, method=method, data=body)
     if content_type:
         req.add_header("Content-Type", content_type)
@@ -47,14 +53,22 @@ def _fetch(url: str, timeout: float, method: str = "GET", body: bytes | None = N
         try:
             return e.code, json.loads(raw)
         except json.JSONDecodeError:
-            return e.code, {"result": "ERROR", "error_id": f"#HTTP{e.code}",
-                            "message": raw.decode("utf-8", errors="replace")}
+            return e.code, {
+                "result": "ERROR",
+                "error_id": f"#HTTP{e.code}",
+                "message": raw.decode("utf-8", errors="replace"),
+            }
     except Exception as e:
-        return 502, {"result": "ERROR", "error_id": "#PROXY",
-                     "message": f"{type(e).__name__}: {e}"}
+        return 502, {
+            "result": "ERROR",
+            "error_id": "#PROXY",
+            "message": f"{type(e).__name__}: {e}",
+        }
 
 
-def make_handler(proxy_timeout: float, batch_workers: int) -> type[http.server.SimpleHTTPRequestHandler]:
+def make_handler(
+    proxy_timeout: float, batch_workers: int
+) -> type[http.server.SimpleHTTPRequestHandler]:
     class Handler(http.server.SimpleHTTPRequestHandler):
         server_version = "UBDCC-Dashboard"
 
@@ -117,7 +131,9 @@ def make_handler(proxy_timeout: float, batch_workers: int) -> type[http.server.S
                     status, body = _fetch(url, proxy_timeout)
                     return item.get("id"), {"status": status, "body": body}
 
-                with concurrent.futures.ThreadPoolExecutor(max_workers=batch_workers) as ex:
+                with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=batch_workers
+                ) as ex:
                     results = dict(ex.map(one, requests))
                 self._json(200, {"results": results})
                 return
@@ -129,8 +145,13 @@ def make_handler(proxy_timeout: float, batch_workers: int) -> type[http.server.S
                     self._json(400, {"result": "ERROR", "message": "missing url"})
                     return
                 data = json.dumps(body).encode() if body is not None else None
-                status, resp = _fetch(target, proxy_timeout, method="POST", body=data,
-                                      content_type="application/json")
+                status, resp = _fetch(
+                    target,
+                    proxy_timeout,
+                    method="POST",
+                    body=data,
+                    content_type="application/json",
+                )
                 self._json(status, resp)
                 return
 
@@ -147,9 +168,12 @@ class ThreadedServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
     daemon_threads = True
 
 
-def serve(host: str, port: int,
-          proxy_timeout: float = PROXY_TIMEOUT_DEFAULT,
-          batch_workers: int = BATCH_WORKERS_DEFAULT) -> None:
+def serve(
+    host: str,
+    port: int,
+    proxy_timeout: float = PROXY_TIMEOUT_DEFAULT,
+    batch_workers: int = BATCH_WORKERS_DEFAULT,
+) -> None:
     """Start the dashboard HTTP server.
 
     Blocks until interrupted.

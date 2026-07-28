@@ -4,6 +4,7 @@
 [![PyPi Downloads](https://pepy.tech/badge/ubdcc-dashboard)](https://pepy.tech/project/ubdcc-dashboard)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://oliver-zehentleitner.github.io/ubdcc-dashboard/license.html)
 [![Supported Python Version](https://img.shields.io/pypi/pyversions/ubdcc-dashboard.svg?logo=python)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI - Status](https://img.shields.io/pypi/status/ubdcc-dashboard.svg)](https://github.com/oliver-zehentleitner/ubdcc-dashboard/issues)
 [![CodeQL](https://github.com/oliver-zehentleitner/ubdcc-dashboard/actions/workflows/codeql.yml/badge.svg)](https://github.com/oliver-zehentleitner/ubdcc-dashboard/actions/workflows/codeql.yml)
 [![Unit Tests](https://github.com/oliver-zehentleitner/ubdcc-dashboard/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/oliver-zehentleitner/ubdcc-dashboard/actions/workflows/unit-tests.yml)
