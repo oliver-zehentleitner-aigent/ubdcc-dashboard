@@ -3,7 +3,8 @@
 ## The local server proxies cluster requests rather than the browser calling the cluster directly
 
 **Status:** active
-**Confirmed** (README "How it works"; commit `8a5dcbf`)
+**Evidence:** confirmed
+**Source:** README "How it works"; commit `8a5dcbf`
 
 `server.py` isn't just a static-file server — it also proxies `/proxy`, `/proxy_batch`, and effectively acts as a CORS proxy so the browser can query a remote UBDCC cluster that doesn't send `Access-Control-Allow-Origin` headers. `/proxy_batch` specifically fans out a list of GETs over a thread pool (`--batch-workers`, default 32) for snappy multi-DepthCache orderbook refreshes, instead of the browser issuing many individual cross-origin requests itself.
 
@@ -14,7 +15,8 @@
 ## Docker image rejected — unnecessary for a pip-installable CLI
 
 **Status:** active
-**Confirmed** (commit `8a5dcbf`: "Docker image: unnecessary for a pip-installable CLI tool.")
+**Evidence:** confirmed
+**Source:** commit `8a5dcbf`: "Docker image: unnecessary for a pip-installable CLI tool."
 
 No Docker image is built or published for this package, unlike the cluster's own components (`ubdcc-dcn`, `ubdcc-mgmt`, `ubdcc-restapi`), which do ship Docker images.
 
