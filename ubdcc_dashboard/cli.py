@@ -1,4 +1,5 @@
 """UBDCC Dashboard command-line interface."""
+
 from __future__ import annotations
 
 import argparse
@@ -27,22 +28,43 @@ def _parser() -> argparse.ArgumentParser:
         prog="ubdcc-dashboard",
         description="Browser-based live dashboard for the UNICORN Binance DepthCache Cluster (UBDCC).",
     )
-    p.add_argument("-V", "--version", action="version",
-                   version=f"ubdcc-dashboard {__version__}")
+    p.add_argument(
+        "-V", "--version", action="version", version=f"ubdcc-dashboard {__version__}"
+    )
     sub = p.add_subparsers(dest="command", metavar="COMMAND")
 
     start = sub.add_parser("start", help="Start the local dashboard server.")
-    start.add_argument("--host", default=DEFAULT_HOST,
-                       help=(f"Interface to bind. Default: {DEFAULT_HOST} (localhost only, "
-                             f"secure). Use 0.0.0.0 to expose on the network."))
-    start.add_argument("--port", type=int, default=DEFAULT_PORT,
-                       help=f"TCP port to listen on. Default: {DEFAULT_PORT}.")
-    start.add_argument("--no-browser", action="store_true",
-                       help="Do not auto-open the dashboard in the default browser.")
-    start.add_argument("--proxy-timeout", type=float, default=PROXY_TIMEOUT_DEFAULT,
-                       help=f"CORS-proxy fetch timeout in seconds. Default: {PROXY_TIMEOUT_DEFAULT}.")
-    start.add_argument("--batch-workers", type=int, default=BATCH_WORKERS_DEFAULT,
-                       help=f"Worker threads for /proxy_batch. Default: {BATCH_WORKERS_DEFAULT}.")
+    start.add_argument(
+        "--host",
+        default=DEFAULT_HOST,
+        help=(
+            f"Interface to bind. Default: {DEFAULT_HOST} (localhost only, "
+            f"secure). Use 0.0.0.0 to expose on the network."
+        ),
+    )
+    start.add_argument(
+        "--port",
+        type=int,
+        default=DEFAULT_PORT,
+        help=f"TCP port to listen on. Default: {DEFAULT_PORT}.",
+    )
+    start.add_argument(
+        "--no-browser",
+        action="store_true",
+        help="Do not auto-open the dashboard in the default browser.",
+    )
+    start.add_argument(
+        "--proxy-timeout",
+        type=float,
+        default=PROXY_TIMEOUT_DEFAULT,
+        help=f"CORS-proxy fetch timeout in seconds. Default: {PROXY_TIMEOUT_DEFAULT}.",
+    )
+    start.add_argument(
+        "--batch-workers",
+        type=int,
+        default=BATCH_WORKERS_DEFAULT,
+        help=f"Worker threads for /proxy_batch. Default: {BATCH_WORKERS_DEFAULT}.",
+    )
 
     return p
 
@@ -57,7 +79,11 @@ def _cmd_start(args: argparse.Namespace) -> int:
         f"UBDCC Dashboard {__version__}\n"
         f"Serving on {_hyperlink(url)}\n"
         f"Bound to {args.host}:{args.port}"
-        + ("  (localhost only — use --host 0.0.0.0 to expose)" if args.host in ("127.0.0.1", "::1") else "")
+        + (
+            "  (localhost only — use --host 0.0.0.0 to expose)"
+            if args.host in ("127.0.0.1", "::1")
+            else ""
+        )
         + "\nPress Ctrl+C to stop."
     )
     print(banner, flush=True)
@@ -66,9 +92,12 @@ def _cmd_start(args: argparse.Namespace) -> int:
         threading.Timer(0.4, lambda: webbrowser.open(url)).start()
 
     try:
-        serve(host=args.host, port=args.port,
-              proxy_timeout=args.proxy_timeout,
-              batch_workers=args.batch_workers)
+        serve(
+            host=args.host,
+            port=args.port,
+            proxy_timeout=args.proxy_timeout,
+            batch_workers=args.batch_workers,
+        )
     except OSError as e:
         print(f"error: {e}", file=sys.stderr)
         return 1

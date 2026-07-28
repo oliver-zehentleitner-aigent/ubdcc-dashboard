@@ -30,3 +30,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.poetry.scripts]
 ubdcc-dashboard = "ubdcc_dashboard.cli:main"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
