@@ -2,6 +2,7 @@
 
 ## Split out of `ubdcc-dashboard-demo`
 
+**Type:** decision
 **Status:** active
 **Evidence:** confirmed
 **Source:** initial commit `5f9384a`: "server.py bundles the existing /proxy + /proxy_batch logic from the ubdcc-dashboard-demo"

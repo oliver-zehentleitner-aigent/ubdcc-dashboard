@@ -2,6 +2,7 @@
 
 ## The local server proxies cluster requests rather than the browser calling the cluster directly
 
+**Type:** decision
 **Status:** active
 **Evidence:** confirmed
 **Source:** README "How it works"; commit `8a5dcbf`
@@ -14,6 +15,7 @@
 
 ## Docker image rejected — unnecessary for a pip-installable CLI
 
+**Type:** decision
 **Status:** active
 **Evidence:** confirmed
 **Source:** commit `8a5dcbf`: "Docker image: unnecessary for a pip-installable CLI tool."
