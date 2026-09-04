@@ -94,9 +94,5 @@ ubdcc_dashboard/
 - Keep `server.py` small and dependency-free. Anything that needs a library
   belongs either in the dashboard (client-side) or in a separate tool.
 
-<!-- keep-the-why:config -->
-- context: `context/`
-- init: complete
-- context-schema: 0.9.0
-- capture-confirmation: confirm-when-unsure
-<!-- /keep-the-why:config -->
+Keep the Why's config for this project migrated to .keep-the-why on
+2026-09-04 — requires skill version 0.10.0 or later to read it.
