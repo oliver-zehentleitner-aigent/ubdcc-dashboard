@@ -2,6 +2,7 @@
 
 ## The local server proxies cluster requests rather than the browser calling the cluster directly
 
+**Id:** d1174d30-d8cf-4dde-bc16-0fa6211408de
 **Type:** decision
 **Status:** active
 **Evidence:** confirmed
@@ -15,6 +16,7 @@
 
 ## Docker image rejected — unnecessary for a pip-installable CLI
 
+**Id:** e2311ae5-8835-4aca-a2cd-0172ce0dbf28
 **Type:** decision
 **Status:** active
 **Evidence:** confirmed
